@@ -4,3 +4,4 @@ flask
 tiktoken
 requests
 gunicorn
+flask_cors
