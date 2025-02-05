@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import re
 import base64
@@ -9,6 +10,7 @@ from openai import OpenAI
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -114,7 +116,7 @@ rag_system = GitHubRAG(openai_api_key, github_token)
 @app.route('/query', methods=['POST'])
 def process_query():
     try:
-        data = request.get_json(force=True, silent=True)  # 🔹 განახლებული JSON პარსინგი
+        data = request.get_json(force=True, silent=True)
         logging.info(f"Received Data: {data}")
 
         if not data or 'github_url' not in data or 'question' not in data:
